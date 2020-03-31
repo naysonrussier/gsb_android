@@ -26,7 +26,7 @@ public class RepasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repas);
-        setTitle("GSB : Frais d'étapes");
+        setTitle("GSB : Frais de repas");
         // modification de l'affichage du DatePicker
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datRepas), false) ;
         // valorisation des propriétés

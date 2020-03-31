@@ -26,7 +26,7 @@ public class NuiteeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuitee);
-        setTitle("GSB : Frais d'étapes");
+        setTitle("GSB : Frais de nuitées");
         // modification de l'affichage du DatePicker
         Global.changeAfficheDate((DatePicker) findViewById(R.id.datNuitee), false) ;
         // valorisation des propriétés
