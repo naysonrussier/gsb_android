@@ -1,5 +1,7 @@
 package fr.cned.emdsgil.suividevosfrais;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -45,8 +47,9 @@ class FraisMois implements Serializable {
      *
      * @param index Indice du frais hors forfait à supprimer
      */
-    public void supprFraisHf(Integer index) {
+    public void supprFraisHf(int index) {
         lesFraisHf.remove(index);
+        Log.d("test","supprimé");
     }
 
     public Integer getMois() {
