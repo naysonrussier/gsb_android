@@ -90,14 +90,16 @@ class FraisHfAdapter extends BaseAdapter {
         holder.cmdSuppHf.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // récupération des frais HF pour cette date
+                // récupération du mois+année sélectionné
                 int annee = ((DatePicker)hfRecap.findViewById(R.id.datHfRecap)).getYear() ;
                 int mois = ((DatePicker)hfRecap.findViewById(R.id.datHfRecap)).getMonth() + 1 ;
-                int datKey = annee*100 + mois ;
+                int key = annee*100 + mois ;
                 // récupération de la position
                 int indice = (int)v.getTag();
-                Global.listFraisMois.get(datKey).supprFraisHf(indice);
+                Global.listFraisMois.get(key).supprFraisHf(indice);
+                // Sérialisation de l'objet pour persistence
                 Serializer.serialize(Global.listFraisMois, hfRecap) ;
+                // Raffraichissement
                 hfRecap.afficheListe();
             }
         });
