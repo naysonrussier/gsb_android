@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         recupSerialize();
         // chargement des méthodes événementielles
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
+        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiteeActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtapeActivity.class);
         cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);

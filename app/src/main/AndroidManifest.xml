@@ -26,6 +26,7 @@
         <activity android:name=".KmActivity" />
         <activity android:name=".EtapeActivity" />
         <activity android:name=".NuiteeActivity" />
+        <activity android:name=".RepasActivity" />
     </application>
 
 </manifest>
