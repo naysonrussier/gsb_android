@@ -21,6 +21,7 @@ class FraisHfAdapter extends BaseAdapter {
 
     private final ArrayList<FraisHf> lesFrais ; // liste des frais du mois
     private final LayoutInflater inflater ;
+    private final HfRecapActivity hfRecap;
 
     /**
      * Constructeur de l'adapter pour valoriser les propriétés
@@ -30,6 +31,7 @@ class FraisHfAdapter extends BaseAdapter {
     public FraisHfAdapter(Context context, ArrayList<FraisHf> lesFrais) {
         inflater = LayoutInflater.from(context) ;
         this.lesFrais = lesFrais ;
+        this.hfRecap = (HfRecapActivity)context;
     }
 
     /**
@@ -89,14 +91,14 @@ class FraisHfAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 // récupération des frais HF pour cette date
-                View hf = inflater.inflate(R.layout.activity_hf_recap, parent, false);
-                int annee = ((DatePicker)hf.findViewById(R.id.datHfRecap)).getYear() ;
-                int mois = ((DatePicker)hf.findViewById(R.id.datHfRecap)).getMonth() + 1 ;
+                int annee = ((DatePicker)hfRecap.findViewById(R.id.datHfRecap)).getYear() ;
+                int mois = ((DatePicker)hfRecap.findViewById(R.id.datHfRecap)).getMonth() + 1 ;
                 int datKey = annee*100 + mois ;
                 // récupération de la position
                 int indice = (int)v.getTag();
                 Global.listFraisMois.get(datKey).supprFraisHf(indice);
-
+                Serializer.serialize(Global.listFraisMois, hfRecap) ;
+                hfRecap.afficheListe();
             }
         });
         holder.txtListJour.setText(String.format(Locale.FRANCE, "%d", lesFrais.get(index).getJour()));

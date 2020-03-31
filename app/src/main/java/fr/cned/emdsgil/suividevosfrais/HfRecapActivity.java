@@ -49,7 +49,7 @@ public class HfRecapActivity extends AppCompatActivity {
 	/**
 	 * Affiche la liste des frais hors forfaits de la date sélectionnée
 	 */
-	private void afficheListe() {
+	public void afficheListe() {
 		Integer annee = ((DatePicker)findViewById(R.id.datHfRecap)).getYear() ;
 		Integer mois = ((DatePicker)findViewById(R.id.datHfRecap)).getMonth() + 1 ;
 		// récupération des frais HF pour cette date

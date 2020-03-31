@@ -49,7 +49,6 @@ class FraisMois implements Serializable {
      */
     public void supprFraisHf(int index) {
         lesFraisHf.remove(index);
-        Log.d("test","supprimé");
     }
 
     public Integer getMois() {
