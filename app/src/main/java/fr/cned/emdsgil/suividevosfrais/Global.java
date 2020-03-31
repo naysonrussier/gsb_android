@@ -20,6 +20,8 @@ abstract class Global {
     // Infos du visiteur stockés dans base Sqlite
     public static Visiteur visiteur;
 
+    public static Boolean ignorerConnexion = false;
+
     // fichier contenant les informations sérialisées
     public static final String filename = "save.fic";
 

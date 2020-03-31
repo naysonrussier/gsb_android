@@ -101,6 +101,19 @@
             android:background="#ddd"
             android:text="Connexion" />
 
+        <TextView
+            android:id="@+id/txtLoginIncorrect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#B90000"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Mot de passe ou utilisateur incorrect"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/cmdLoginLater"
             android:layout_width="match_parent"

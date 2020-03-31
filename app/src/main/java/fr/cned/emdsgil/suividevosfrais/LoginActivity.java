@@ -12,15 +12,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
 
     // informations affichées dans l'activité
-    private Integer annee ;
-    private Integer mois ;
-    private Integer qte ;
+    private AccesDistant accesDistant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,13 @@ public class LoginActivity extends AppCompatActivity {
     private void cmdLogin_clic() {
         findViewById(R.id.cmdLogin).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
+                JSONArray identifiants = new JSONArray();
+                TextView utilisateur = findViewById(R.id.txtLoginUtilisateur);
+                TextView mdp = findViewById(R.id.txtLoginMdp);
+                identifiants.put(utilisateur.getText());
+                identifiants.put(mdp.getText());
+                accesDistant = new AccesDistant(LoginActivity.this);
+                accesDistant.envoi("connexion", identifiants);
             }
         });
     }
@@ -66,9 +78,25 @@ public class LoginActivity extends AppCompatActivity {
     private void cmdLoginLater_clic() {
         findViewById(R.id.cmdLoginLater).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
+                Global.ignorerConnexion = true;
+                retourActivityPrincipale();
             }
         });
+    }
+
+    /**
+     * Valide l'authentification
+     * @param token
+     * @param nom
+     * @param prenom
+     */
+    public void loginSucces(String token, String nom, String prenom) {
+        Global.visiteur.majVisiteur(nom, prenom, token);
+        retourActivityPrincipale();
+    }
+
+    public void loginErreur() {
+        ((TextView)findViewById(R.id.txtLoginIncorrect)).setVisibility(View.VISIBLE);
     }
 
     /**

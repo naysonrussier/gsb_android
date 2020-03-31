@@ -34,18 +34,16 @@ public class Visiteur {
 
     /**
      * Met à jour les données du visiteur
-     * @param id
      * @param nom
      * @param prenom
      * @param token
      */
-    public void majVisiteur(String id, String nom, String prenom, String token){
+    public void majVisiteur(String nom, String prenom, String token){
         this.bd = accesBD.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("id", id);
         cv.put("nom", nom);
         cv.put("prenom", prenom);
-        cv.put("nom", nom);
+        cv.put("token", token);
         // exécution de la requête
         bd.update("visiteur", cv, "",null);
         this.getInfo();
@@ -57,7 +55,7 @@ public class Visiteur {
     private void getInfo(){
         // accès en lecture à la BDD
         this.bd = accesBD.getReadableDatabase();
-        String req = "select nom, prenom, id, token from visiteur;";
+        String req = "select nom, prenom, token from visiteur;";
         // curseur pour récupérer le résultat de l'exécution de la requête
         Cursor curseur = bd.rawQuery(req, null);
         curseur.moveToFirst();
@@ -66,8 +64,7 @@ public class Visiteur {
             // récupération du champ
             nom = curseur.getString(0);
             prenom = curseur.getString(1);
-            id = curseur.getString(2);
-            token = curseur.getString(3);
+            token = curseur.getString(2);
         }
         curseur.close();
     }
@@ -81,9 +78,6 @@ public class Visiteur {
         return prenom;
     }
 
-    public String getId() {
-        return id;
-    }
 
     public String getToken() {
         return token;

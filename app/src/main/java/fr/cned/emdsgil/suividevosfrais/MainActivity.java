@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         recupSerialize();
         // Initialisation du visiteur
         Global.visiteur = new Visiteur(this);
-        if (Global.visiteur.getToken().equals("")) {
+        String token = Global.visiteur.getToken();
+        if (Global.visiteur.getToken().equals("") && !Global.ignorerConnexion) {
             this.retourPageConnexion();
         } else {
             setContentView(R.layout.activity_main);
