@@ -17,6 +17,9 @@ abstract class Global {
 	 * public static Hashtable<Integer, FraisMois> listFraisMois = new Hashtable<Integer, FraisMois>();
 	*/
 
+    // Infos du visiteur stockés dans base Sqlite
+    public static Visiteur visiteur;
+
     // fichier contenant les informations sérialisées
     public static final String filename = "save.fic";
 

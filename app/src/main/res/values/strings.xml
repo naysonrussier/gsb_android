@@ -31,4 +31,7 @@
     <string name="icone_recap_hf">Icone du récapitulatif des frais hors forfait</string>
     <string name="icone_transfert">Icone de la commande de transfert</string>
     <string name="icone_supp_hf">Icône de suppression d\'une ligne de frais</string>
+    <string name="connexion_help">Veuillez vous connecter avec vos identifiants GSB, afin de pouvoir
+        synchroniser vos notes de frais</string>
+    <string name="connexion_bienvenue">Bienvenue sur l\'application de gestion de vos frais</string>
 </resources>

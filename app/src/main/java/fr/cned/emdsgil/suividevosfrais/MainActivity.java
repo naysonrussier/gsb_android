@@ -3,6 +3,8 @@ package fr.cned.emdsgil.suividevosfrais;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -10,24 +12,31 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.Hashtable;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setTitle("GSB : Suivi des frais");
         // récupération des informations sérialisées
         recupSerialize();
-        // chargement des méthodes événementielles
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiteeActivity.class);
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtapeActivity.class);
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
-        cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
-        cmdTransfert_clic();
+        // Initialisation du visiteur
+        Global.visiteur = new Visiteur(this);
+        if (Global.visiteur.getToken().equals("")) {
+            this.retourPageConnexion();
+        } else {
+            setContentView(R.layout.activity_main);
+            setTitle("GSB : Suivi des frais");
+            // chargement des méthodes événementielles
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdKm)), KmActivity.class);
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdRepas)), RepasActivity.class);
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdNuitee)), NuiteeActivity.class);
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdEtape)), EtapeActivity.class);
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHf)), HfActivity.class);
+            cmdMenu_clic(((ImageButton) findViewById(R.id.cmdHfRecap)), HfRecapActivity.class);
+            cmdTransfert_clic();
+        }
     }
 
     @Override
@@ -90,5 +99,14 @@ public class MainActivity extends AppCompatActivity {
                 // en construction
             }
         });
+    }
+
+    /**
+     * Affichage page connexion
+     */
+    private void retourPageConnexion() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class) ;
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent) ;
     }
 }
