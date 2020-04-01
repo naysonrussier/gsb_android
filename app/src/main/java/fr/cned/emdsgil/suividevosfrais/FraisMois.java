@@ -46,7 +46,7 @@ class FraisMois implements Serializable {
      */
     public void addFraisHf(Float montant, String motif, Integer jour) {
         lesFraisHf.add(new FraisHf(montant, motif, jour));
-        envoyee = false;
+        this.envoyee = false;
     }
 
     /**
@@ -56,7 +56,7 @@ class FraisMois implements Serializable {
      */
     public void supprFraisHf(int index) {
         lesFraisHf.remove(index);
-        envoyee = false;
+        this.envoyee = false;
     }
 
     public Integer getMois() {
@@ -81,7 +81,7 @@ class FraisMois implements Serializable {
 
     public void setEtape(Integer etape) {
         this.etape = etape;
-        envoyee = false;
+        this.envoyee = false;
     }
 
     public Integer getKm() {
@@ -90,7 +90,7 @@ class FraisMois implements Serializable {
 
     public void setKm(Integer km) {
         this.km = km;
-        envoyee = false;
+        this.envoyee = false;
     }
 
     public Integer getNuitee() {
@@ -99,7 +99,7 @@ class FraisMois implements Serializable {
 
     public void setNuitee(Integer nuitee) {
         this.nuitee = nuitee;
-        envoyee = false;
+        this.envoyee = false;
     }
 
     public Integer getRepas() {
@@ -108,7 +108,7 @@ class FraisMois implements Serializable {
 
     public void setRepas(Integer repas) {
         this.repas = repas;
-        envoyee = false;
+        this.envoyee = false;
     }
 
     public ArrayList<FraisHf> getLesFraisHf() {

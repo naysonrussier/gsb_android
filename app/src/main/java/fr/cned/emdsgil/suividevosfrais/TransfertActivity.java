@@ -83,6 +83,7 @@ public class TransfertActivity extends AppCompatActivity {
                 unFrais.setEnvoyee();
             }
         }
+        Serializer.serialize(Global.listFraisMois, TransfertActivity.this) ;
         afficheListe();
     }
 
@@ -111,7 +112,7 @@ public class TransfertActivity extends AppCompatActivity {
     public void afficheListe() {
         Collections.sort(resultats);
         TextView etat = findViewById(R.id.txtTransfertEtat);
-        etat.setText("Envoyé " + nbRecu + " sur " + nbEnvoye);
+        etat.setText("Envoyé " + nbRecu + " mois sur " + nbEnvoye);
         ListView listView = findViewById(R.id.lstTransfertFait);
         TransfertAdapter adapter = new TransfertAdapter(TransfertActivity.this, resultats);
         listView.setAdapter(adapter) ;
