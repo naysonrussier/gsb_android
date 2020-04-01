@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         recupSerialize();
         // Initialisation du visiteur
         Global.visiteur = new Visiteur(this);
-        String token = Global.visiteur.getToken();
         if (Global.visiteur.getToken().equals("") && !Global.ignorerConnexion) {
             this.retourPageConnexion();
         } else {
@@ -96,8 +95,11 @@ public class MainActivity extends AppCompatActivity {
     private void cmdTransfert_clic() {
         findViewById(R.id.cmdTransfert).setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // envoi les informations sérialisées vers le serveur
-                // en construction
+                if (Global.visiteur.getToken().equals("")) {
+                    retourPageConnexion();
+                } else {
+                    retourPageTransfert();
+                }
             }
         });
     }
@@ -107,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
      */
     private void retourPageConnexion() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class) ;
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent) ;
+    }
+
+    /**
+     * Affichage page transfert
+     */
+    private void retourPageTransfert() {
+        Intent intent = new Intent(MainActivity.this, TransfertActivity.class) ;
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent) ;
     }

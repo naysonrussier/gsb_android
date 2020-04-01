@@ -42,7 +42,6 @@ public class AccesDistant implements AsyncResponse {
     @Override
     public void processFinish(String output) {
         // pour vérification, affiche le contenu du retour dans la console
-        Log.d("serveur", "************" + output);
         // découpage du message reçu
         String[] message = output.split("%");
         // contrôle si le retour est correct (au moins 2 cases)
@@ -52,6 +51,11 @@ public class AccesDistant implements AsyncResponse {
                 ((LoginActivity)activity).loginSucces(message[1], message[2], message[3]);
             } else if(message[0].equals("connexion_erreur")) {
                 ((LoginActivity)activity).loginErreur();
+            } else if (message[0].equals("synchro_succes")) {
+                ((TransfertActivity)activity).transfertSucces(message[1]);
+            } else if (message[0].equals("synchro_erreur")) {
+                ((TransfertActivity)activity).transfertErreur(message[1],message[2]);
+
             }
         }
     }

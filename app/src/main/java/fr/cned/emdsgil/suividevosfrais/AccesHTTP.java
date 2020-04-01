@@ -101,7 +101,13 @@ public class AccesHTTP extends AsyncTask<String, Integer, Long> {
     @Override
     protected void onPostExecute(Long result) {
         // ret contient l'information récupérée
-        delegate.processFinish(this.ret.toString());
+        String res;
+        if (this.ret == null) {
+            res = "";
+        } else {
+            res = this.ret.toString();
+        }
+        delegate.processFinish(res);
     }
 
 }

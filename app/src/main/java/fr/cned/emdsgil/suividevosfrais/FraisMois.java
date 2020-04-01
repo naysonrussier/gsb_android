@@ -2,6 +2,10 @@ package fr.cned.emdsgil.suividevosfrais;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,7 +20,9 @@ class FraisMois implements Serializable {
     private Integer km; // nombre de km du mois
     private Integer nuitee; // nombre de nuitées du mois
     private Integer repas; // nombre de repas du mois
+    private Boolean envoyee; // transféré à la base distante
     private final ArrayList<FraisHf> lesFraisHf; // liste des frais hors forfait du mois
+
 
     public FraisMois(Integer annee, Integer mois) {
         this.annee = annee;
@@ -40,6 +46,7 @@ class FraisMois implements Serializable {
      */
     public void addFraisHf(Float montant, String motif, Integer jour) {
         lesFraisHf.add(new FraisHf(montant, motif, jour));
+        envoyee = false;
     }
 
     /**
@@ -49,6 +56,7 @@ class FraisMois implements Serializable {
      */
     public void supprFraisHf(int index) {
         lesFraisHf.remove(index);
+        envoyee = false;
     }
 
     public Integer getMois() {
@@ -73,6 +81,7 @@ class FraisMois implements Serializable {
 
     public void setEtape(Integer etape) {
         this.etape = etape;
+        envoyee = false;
     }
 
     public Integer getKm() {
@@ -81,6 +90,7 @@ class FraisMois implements Serializable {
 
     public void setKm(Integer km) {
         this.km = km;
+        envoyee = false;
     }
 
     public Integer getNuitee() {
@@ -89,6 +99,7 @@ class FraisMois implements Serializable {
 
     public void setNuitee(Integer nuitee) {
         this.nuitee = nuitee;
+        envoyee = false;
     }
 
     public Integer getRepas() {
@@ -97,10 +108,47 @@ class FraisMois implements Serializable {
 
     public void setRepas(Integer repas) {
         this.repas = repas;
+        envoyee = false;
     }
 
     public ArrayList<FraisHf> getLesFraisHf() {
         return lesFraisHf;
     }
 
+    public Boolean getEnvoyee() {
+        return envoyee;
+    }
+
+    public void setEnvoyee() {
+        this.envoyee = true;
+    }
+
+    public JSONObject getFraisJson() {
+        JSONObject donnees = new JSONObject();
+        try {
+            donnees.put("KM", this.km);
+            donnees.put("ETP", this.etape);
+            donnees.put("NUI", this.nuitee);
+            donnees.put("REP", this.repas);
+        } catch (JSONException e) {
+        }
+        return donnees;
+    }
+
+    public JSONArray getFraisHFJson() {
+        JSONArray fraisHF = new JSONArray();
+        this.lesFraisHf.size();
+        for(int i = 0; i < this.lesFraisHf.size(); i++) {
+            FraisHf unFrais = this.lesFraisHf.get(i);
+            JSONObject fraisJson = new JSONObject();
+            try {
+                fraisJson.put("montant", unFrais.getMontant());
+                fraisJson.put("motif", unFrais.getMotif());
+                fraisJson.put("jour", unFrais.getJour());
+            } catch (JSONException e) {
+            }
+            fraisHF.put(fraisJson);
+        }
+        return fraisHF;
+    }
 }
