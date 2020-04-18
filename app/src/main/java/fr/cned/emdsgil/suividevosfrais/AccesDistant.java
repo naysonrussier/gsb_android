@@ -23,7 +23,7 @@ import java.util.Date;
 public class AccesDistant implements AsyncResponse {
 
     // constante
-    private static final String SERVERADDR = "http://192.168.1.94/gsb/api.php";
+    private static final String SERVERADDR = "http://gsb.application.nayson-russier.fr/api.php";
 
     // propriétés
     private Context activity;
